@@ -1,0 +1,7 @@
+opencv-python
+pyautogui
+pillow
+matplotlib
+numpy
+python-dotenv
+pygame
