@@ -17,10 +17,11 @@ timed_instructions = [
     ('1:23', '1'), # press 1 for questions about claim
     ('1:32', 'SSN'), # enter SSN
     ('1:41', '1'), # confirm SSN entered correctly
-    ('2:22', '2'), # 2 for no military service
-    ('2:25', '2'), # 2 for no federal employment
-    ('2:28', '2'), # 2 for no out of state income
-    ('3:18', 'END') # check if call ended (if not then live agent soon)
+    ('1:51', '1'), # have pin
+    ('1:55', 'PIN'), # enter pin
+    ('2:02', '1'), # confirm pin
+    ('4:03', '0'), # speak to rep
+    ('4:48', 'END') # check if call ended (if not then live agent soon)
 ]
 
 def screen_grab(roi=None):
@@ -128,6 +129,10 @@ def scheduled_key_press(keypad_locs, call_btn_loc, target_number):
         elif key == 'SSN': # enter ssn stage
             ssn = os.getenv('SSN')
             for num in ssn:
+                pyautogui.click(keypad_locs[num])
+        elif key == 'PIN': # enter pin stage
+            pin = os.getenv('PIN')
+            for num in pin:
                 pyautogui.click(keypad_locs[num])
         elif key == 'END': # end of call cycle, check if ended and return False if it did
             call_in_progress = locate_button_from_image("res/hangup_btn.png") # check if hangup button there
